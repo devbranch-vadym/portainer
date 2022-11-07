@@ -5,9 +5,12 @@ import { applyBoxCSS, confirmButtons, ModalTypeIcon } from './utils';
 import {
   ConfirmAsyncOptions,
   ConfirmCallback,
-  ConfirmOptions,
   openConfirm,
 } from './ConfirmModal';
+
+interface ConfirmOptions extends ConfirmAsyncOptions {
+  callback: ConfirmCallback;
+}
 
 export function confirmAsync(options: ConfirmAsyncOptions) {
   return openConfirm({
@@ -202,4 +205,19 @@ export function confirmChangePassword() {
       },
     },
   });
+}
+
+export function confirmForceChangePassword() {
+  const box = bootbox.dialog({
+    message:
+      'Please update your password to a stronger password to continue using Portainer',
+    buttons: {
+      confirm: {
+        label: 'OK',
+        className: 'btn-primary',
+      },
+    },
+  });
+
+  applyBoxCSS(box);
 }
