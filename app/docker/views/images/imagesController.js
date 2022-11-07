@@ -1,6 +1,7 @@
 import _ from 'lodash-es';
 import { PorImageRegistryModel } from 'Docker/models/porImageRegistry';
 import { isOfflineEndpoint } from '@/portainer/helpers/endpointHelper';
+import { ModalTypeIcon } from '@/portainer/services/modal.service/utils';
 
 angular.module('portainer.docker').controller('ImagesController', [
   '$scope',
@@ -53,7 +54,7 @@ angular.module('portainer.docker').controller('ImagesController', [
     };
 
     $scope.confirmRemovalAction = function (selectedItems, force) {
-      ModalService.confirmImageForceRemoval(function (confirmed) {
+      confirmImageForceRemoval(function (confirmed) {
         if (!confirmed) {
           return;
         }
@@ -162,3 +163,18 @@ angular.module('portainer.docker').controller('ImagesController', [
     initView();
   },
 ]);
+
+function confirmImageForceRemoval(callback) {
+  confirm({
+    title: 'Are you sure?',
+    modalType: ModalTypeIcon.Destructive,
+    message: 'Forcing the removal of the image will remove the image even if it has multiple tags or if it is used by stopped containers.',
+    buttons: {
+      confirm: {
+        label: 'Remove the image',
+        className: 'btn-danger',
+      },
+    },
+    callback,
+  });
+}
