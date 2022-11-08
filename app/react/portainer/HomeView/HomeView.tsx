@@ -8,13 +8,13 @@ import * as notifications from '@/portainer/services/notifications';
 import { confirmAsync } from '@/portainer/services/modal.service/confirm';
 
 import { PageHeader } from '@@/PageHeader';
+import { ModalType } from '@@/modals';
 
 import { EnvironmentList } from './EnvironmentList';
 import { EdgeLoadingSpinner } from './EdgeLoadingSpinner';
 import { MotdPanel } from './MotdPanel';
 import { LicenseNodePanel } from './LicenseNodePanel';
 import { BackupFailedPanel } from './BackupFailedPanel';
-import { ModalType } from '@/portainer/services/modal.service/types';
 
 export function HomeView() {
   const [connectingToEdgeEndpoint, setConnectingToEdgeEndpoint] =
