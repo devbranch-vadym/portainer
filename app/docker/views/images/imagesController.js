@@ -2,6 +2,7 @@ import _ from 'lodash-es';
 import { PorImageRegistryModel } from 'Docker/models/porImageRegistry';
 import { isOfflineEndpoint } from '@/portainer/helpers/endpointHelper';
 import { ModalTypeIcon } from '@/portainer/services/modal.service/utils';
+import { confirmImageExport } from '@/react/docker/images/common/ConfirmExportModal';
 
 angular.module('portainer.docker').controller('ImagesController', [
   '$scope',
@@ -106,7 +107,7 @@ angular.module('portainer.docker').controller('ImagesController', [
         return;
       }
 
-      ModalService.confirmImageExport(function (confirmed) {
+      confirmImageExport(function (confirmed) {
         if (!confirmed) {
           return;
         }
